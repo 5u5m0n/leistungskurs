@@ -8,6 +8,6 @@ public class ZahlenMengen {
         d /= 2;
         System.out.println(i);
         System.out.println(d);
-        //Datentyp beibt gleich. Int werden gerundet
+        //Datentyp beibt gleich. Int werden Abgerundet
     }
 }
