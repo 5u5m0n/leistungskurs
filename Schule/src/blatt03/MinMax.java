@@ -15,25 +15,17 @@ public class MinMax {
         int kleinsteZahl = 0;
         if ((ersteZahl>=zweiteZahl) && (ersteZahl>=dritteZahl)) {           //erste ist größte
             groessteZahl = ersteZahl;
-            if (zweiteZahl<=dritteZahl) {
-                kleinsteZahl = zweiteZahl;
-            }else {
-                kleinsteZahl = dritteZahl;
-            }
         } else if ((zweiteZahl>=dritteZahl) && (zweiteZahl>=ersteZahl)) {   //zweite ist größte
             groessteZahl = zweiteZahl;
-            if (ersteZahl<=dritteZahl) {
-                kleinsteZahl = ersteZahl;
-            }else {
-                kleinsteZahl = dritteZahl;
-            }
         } else if ((dritteZahl>=zweiteZahl) && (dritteZahl>=ersteZahl)) {   //dritte ist größte
             groessteZahl = dritteZahl;
-            if (zweiteZahl<=ersteZahl) {
-                kleinsteZahl = zweiteZahl;
-            }else {
-                kleinsteZahl = ersteZahl;
-            }
+        }
+        if ((ersteZahl<=zweiteZahl) && (ersteZahl<=dritteZahl)) {
+            kleinsteZahl = ersteZahl;
+        } else if ((zweiteZahl<=ersteZahl) && (zweiteZahl<=dritteZahl)) {
+            kleinsteZahl = zweiteZahl;
+        } else if ((dritteZahl<=ersteZahl) && (dritteZahl<=zweiteZahl)) {
+            kleinsteZahl = dritteZahl;
         }
         System.out.println("Größte Zahl: " + groessteZahl);
         System.out.println("Kleinste Zahl: " + kleinsteZahl);
