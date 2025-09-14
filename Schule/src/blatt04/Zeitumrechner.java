@@ -26,11 +26,18 @@ public class Zeitumrechner {
             tage += 1;
             stunden -= 24;
             //zaehler++;
-        }
+      }
         //b) 151638
-        System.out.printf("%d Tage, %d Stunden, %d Minuten, %d Sekunden", tage, stunden, minuten, sekunden);
         /*c)
-
+        minuten = sekunden/60;
+        sekunden = sekunden%60;
+        stunden = minuten/60;
+        minuten = minuten%60;
+        tage = stunden/24;
+        stunden = stunden%24;
+        6 Rechenoperationen
         */
+        System.out.printf("%d Tage, %d Stunden, %d Minuten, %d Sekunden", tage, stunden, minuten, sekunden);
+
     }
 }
