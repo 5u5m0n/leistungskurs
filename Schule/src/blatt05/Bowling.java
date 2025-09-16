@@ -1,4 +1,4 @@
-package blatt04;
+package blatt05;
 
 import java.util.Scanner;
 
@@ -6,22 +6,20 @@ public class Bowling {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int punkte = 0;
-        int frames = 0;
-        int wuerfe = 0;
+        int frames = 1;
+        int wuerfe = 1;
         int pins = 10;
         int multiplikator = 1;
-        int strike = 0;
-        while (frames < 10) {
-            frames++;
+        int multiCounter = 0;
+        while (frames <= 10) {
             System.out.println("Frame " + frames);
-            while (wuerfe < 2) {
-                wuerfe++;
-                switch (strike) {
+            while (wuerfe <= 2) {
+                switch (multiCounter) {
                     case 0:
                         multiplikator = 1;
                         break;
                     case 1, 2:
-                        strike--;
+                        multiCounter--;
                         multiplikator = 2;
                         break;
                     case 3:
@@ -36,17 +34,18 @@ public class Bowling {
                 System.out.println("Punkte: " + punkte);
                 System.out.println("----------------------------------");
                 if (wuerfe == 1 && pins == 0) {
-                    strike += 2;
+                    multiCounter += 2;
                     System.out.println("STRIKE!");
                     break;
                 } else if (wuerfe == 2 && pins == 0) {
-                    strike += 1;
+                    multiCounter += 1;
                     System.out.println("SPARE!");
                 }
-
+                wuerfe++;
             }
             pins = 10;
-            wuerfe = 0;
+            wuerfe = 1;
+            frames++;
         }
     }
 }
