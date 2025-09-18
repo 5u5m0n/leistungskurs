@@ -5,15 +5,20 @@ import java.util.Scanner;
 public class SicheresPasswort {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        String a;
         boolean length = false;
         boolean uppercase = false;
         boolean lowercase = false;
         boolean digit = false;
         boolean special = false;
-        while (!length && !uppercase && !lowercase && !digit && !special) {
+        while (true) {
+            length = false;
+            uppercase = false;
+            lowercase = false;
+            digit = false;
+            special = false;
             System.out.println("Passwort eingeben.");
-            String a = input.nextLine();
+            a = input.nextLine();
             for (int i = 0; i < a.length(); i++) {
                 char c = a.charAt(i);
                 if (c >= 'A' && c <= 'Z') {
@@ -29,14 +34,11 @@ public class SicheresPasswort {
             if (a.length() >= 8) {
                 length = true;
             }
-            if (!length || !uppercase || !lowercase || !digit || !special) {
+            if (length && uppercase && lowercase && digit && special) {
+                break;
+            } else {
                 System.out.println("Passwort nict sicher genug.");
             }
-            length = false;
-            uppercase = false;
-            lowercase = false;
-            digit = false;
-            special = false;
         }
         System.out.println("Passwort gesichert.");
     }
