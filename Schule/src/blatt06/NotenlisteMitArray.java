@@ -25,6 +25,6 @@ public class NotenlisteMitArray {
             durchschnitt += noten[i];
         }
         durchschnitt /= noten.length;
-        System.out.println("Durchschnitt: " + durchschnitt);
+        System.out.printf("Durchschnitt: %.2f", durchschnitt);
     }
 }
