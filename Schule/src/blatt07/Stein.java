@@ -1,6 +1,12 @@
 package blatt07;
 
 public class Stein {
+    /**
+     * Diese Funktion berechnet den größte gemeinsamen Teiler zweier Ganzzahlen
+     * @param a
+     * @param b
+     * @return
+     */
     public static int steinGGT(int a, int b) {
         int k = 0;
         while (a != 0 && b != 0) {
