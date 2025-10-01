@@ -62,14 +62,13 @@ public class Zahlensysteme {
          if (istDezimal(s)){
              return Integer.parseInt(s);
          } else if (istBinaer(s)){
-             for (int i = chars.length - 2; i > 1; i--){
+             for (int i = 1; i < chars.length - 2; i++){
                  if (chars[i] == '1') {
-                     wert += Math.pow(2, chars.length-i-2);
+                     wert += Math.pow(2, chars.length-i-3);
                  }
              }
-             return wert;
          }
-         return 0;
+         return wert;
      }
 
      public static void main(String[] args) {
