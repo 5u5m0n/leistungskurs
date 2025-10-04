@@ -200,9 +200,5 @@ public class Zahlensysteme {
      }
 
      public static void main(String[] args) {
-         String s = "(47E)16";
-         System.out.println(s);
-         System.out.println(hexadezimalZuBinaer(s));
-         System.out.println(zuDezimal(s));
      }
 }
