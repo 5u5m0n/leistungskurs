@@ -19,16 +19,24 @@ public class Kuerzen {
         return false;
     }
 
+    /**
+     * Gibt einen gegebenen Bruch vollständig gekürzt aus
+     * @param a Zähler
+     * @param b Nenner
+     */
     public static void kuerzen(int a, int b) {
         if (istKuerzbar(a, b)) {
-
+            for (int i = a; i >= 2; i--) {
+                if (istTeiler(a, i) && istTeiler(b, i)) {
+                    System.out.println((a/i) + "/" + (b/i));
+                    break;
+                }
+            }
         } else {
             System.out.println(a + "/" + b);
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(istKuerzbar(7, 3));
-        System.out.println(istKuerzbar(2, 8));
     }
 }
