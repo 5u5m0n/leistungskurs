@@ -2,6 +2,8 @@ package blatt09;
 
 import java.util.Arrays;
 
+import static blatt09.Teiler.teiler;
+
 public class Primzahlen {
 
     /**
@@ -64,24 +66,25 @@ public class Primzahlen {
             System.out.println("-");
             return;
         }
+        int i = 0;
         System.out.print(a + " = ");
-        int[] primzahlen = generierePrimzahlen(a / 2);
+        int[] teiler = teiler(a);
         int rest = a;
-        for (int i = 0; i < primzahlen.length; i++) {
-            if (istPrim(rest)) {
-                System.out.println(rest);
-                break;
-            } else if (rest % primzahlen[i] == 0) {
-                System.out.print(primzahlen[i] + " * ");
-                rest /= primzahlen[i];
-                i = -1;
+        while (!istPrim(rest)) {
+            if (istPrim(teiler[i])) {
+                System.out.print(teiler[i] + " * ");
+                rest /= teiler[i];
+                i = 0;
+            } else {
+                i++;
             }
 
         }
+        System.out.println(rest);
 
     }
 
     public static void main(String[] args) {
-        primfaktorzerlegung(1);
+        primfaktorzerlegung(356);
     }
 }
