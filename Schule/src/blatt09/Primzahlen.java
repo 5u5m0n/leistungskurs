@@ -1,9 +1,5 @@
 package blatt09;
 
-import java.util.Arrays;
-
-import static blatt09.Teiler.teiler;
-
 public class Primzahlen {
 
     /**
@@ -68,7 +64,7 @@ public class Primzahlen {
         }
         int i = 0;
         System.out.print(a + " = ");
-        int[] teiler = teiler(a);
+        int[] teiler = Teiler.teiler(a);
         int rest = a;
         while (!istPrim(rest)) {
             if (istPrim(teiler[i])) {
