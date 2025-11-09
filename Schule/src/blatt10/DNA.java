@@ -305,4 +305,7 @@ public class DNA {
         /* h)
             Pro Zeichen werden hier 2 Bit verwendet
         */
+        /* k)
+            Pro Nukleotid 2 Bit
+         */
 }
