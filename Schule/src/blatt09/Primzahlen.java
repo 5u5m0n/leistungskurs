@@ -1,5 +1,7 @@
 package blatt09;
 
+import java.util.Arrays;
+
 public class Primzahlen {
 
     /**
@@ -62,25 +64,22 @@ public class Primzahlen {
             System.out.println("-");
             return;
         }
-        int i = 0;
         System.out.print(a + " = ");
-        int[] teiler = Teiler.teiler(a);
+        int[] primzahlen = generierePrimzahlen(a / 2);
         int rest = a;
-        while (!istPrim(rest)) {
-            if (istPrim(teiler[i])) {
-                System.out.print(teiler[i] + " * ");
-                rest /= teiler[i];
-                i = 0;
-            } else {
-                i++;
+        for (int i = 0; i < primzahlen.length; i++) {
+            if (istPrim(rest)) {
+                System.out.println(rest);
+                break;
+            } else if (rest % primzahlen[i] == 0) {
+                System.out.print(primzahlen[i] + " * ");
+                rest /= primzahlen[i];
+                i = -1;
             }
-
         }
-        System.out.println(rest);
-
     }
 
     public static void main(String[] args) {
-        primfaktorzerlegung(356);
+        primfaktorzerlegung(1);
     }
 }
