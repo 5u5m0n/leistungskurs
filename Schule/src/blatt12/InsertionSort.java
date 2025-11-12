@@ -4,6 +4,10 @@ import static blatt07.ArbeitMitArrays.printArray;
 
 public class InsertionSort {
 
+    /**
+     * Sortiert eine gegebene int-Liste von klein nach groß
+     * @param arr Liste
+     */
     public static void insertionSort(int[] arr) {
         int eingabe;
         int j;
@@ -12,6 +16,7 @@ public class InsertionSort {
             j = i;
             while (j > 0 && arr[j - 1] > eingabe) {
                 arr[j] = arr[j - 1];
+                j--;
             }
             arr[j] = eingabe;
         }
