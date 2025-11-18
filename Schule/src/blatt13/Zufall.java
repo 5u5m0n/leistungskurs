@@ -29,8 +29,6 @@ public class Zufall {
     }
 
     public static void main(String[] args) {
-        while(true){
-            printArray(zufallArray((int) Math.pow(10, 5), 1, 3));
-        }
+        printArray(zufallArray((int) Math.pow(10, 9), 1, 3));
     }
 }
