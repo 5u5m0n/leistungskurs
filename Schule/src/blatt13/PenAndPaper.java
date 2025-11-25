@@ -67,13 +67,48 @@ public class PenAndPaper {
     public static int kampf(){
         int[] tp = new int[]{70, 42};
         int[] ac = new int[]{14, 10};
-        int[] bonus = new int[]{2, 1};
-        int[] dmg = new int[]{1, 6, 2, 9};
+        int[] bonus = new int[]{1, 2};
+        int[] dmg = new int[]{6, 8};
+        int[] schBonus = new int[]{0, 10};
         int[] adv = new int[]{3, -3};
         while (true) {
             for(int i = 0; i < 2; i++){
-                int angr = angriff(bonus[i], ac[i], adv[i], dmg[2*i], dmg[2*i+1]);
+                int angr = angriff(bonus[i], ac[i], adv[i], 1, dmg[i]) ;
+                if (angr > -1) {
+                    tp[i] -= angr + (int) (Math.random() * schBonus[i]);
+                }
+                if (tp[i] <= 0) {
+                    return i;
+                }
+                if (adv[i] > 0) {
+                    adv[i]--;
+                } else if (adv[i] < 0) {
+                    adv[i]++;
+                }
             }
         }
+    }
+
+    public static void main(String[] args) {
+
+        for (int j = 0; j < Math.pow(10, 1); j++) {
+            int barde = 0;
+            int barbar = 0;
+            for (int i = 0; i < Math.pow(10, 6); i++) {
+                if (kampf() == 0) {
+                    barde++;
+                } else {
+                    barbar++;
+                }
+            }
+            System.out.println("\nBarde: " + barde);
+            System.out.println("Barbar: " + barbar);
+            double chance = ((double) barde /10000);
+            System.out.println("Chance Barde: " + chance);
+            chance = ((double) barbar /10000);
+            System.out.println("Chance Barbar: " + chance);
+        }
+
+
     }
 }
