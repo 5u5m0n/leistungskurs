@@ -145,6 +145,21 @@ public class MultiArrays {
     }
 
     /**
+     * Fertigt eine Kopie von einem gegebenen 2D-Zeichen-Array an
+     * @param a Array
+     * @return Kopie
+     */
+    public static char[][] copy2DCharArray(char[][] a) {
+        char[][] arr = new char[a.length][a[0].length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                arr[i][j] = a[i][j];
+            }
+        }
+        return arr;
+    }
+
+    /**
      * Verschiebt eine Reihe eines gegebenen 2D-Ganzzahl-Arrays úm einen Wert
      * @param arr Array
      * @param index Reihe
@@ -157,10 +172,9 @@ public class MultiArrays {
     }
 
     public static void main(String[] args) {
-        int[][] arr = createCountingArray(4, 5);
-        print2DArray(arr);
-        shiftRows(arr, 2, 3);
-        System.out.println("");
-        print2DArray(arr);
+        char[][] a = (char[][]) createEmpty2DCharArray(3, 3);
+        char[][] b = copy2DCharArray(a);
+        print2DArray(a);
+        print2DArray(b);
     }
 }
