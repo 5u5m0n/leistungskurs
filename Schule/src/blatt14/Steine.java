@@ -10,8 +10,10 @@ public class Steine {
     static char[][] spielfeld;
     static SchischVisualizer sv = new SchischVisualizer();
     static int[] rot = new int[] {1, 2, -1, -2};
-    static int[]steinx = new int[4];
-    static int[]steiny = new int[4];
+    static int[] steinx = new int[4];
+    static int[] steiny = new int[4];
+    static boolean lose = false;
+    static boolean istGefallen = false;
 
     /**
      * Initialisiert das Spielfeld
@@ -20,7 +22,7 @@ public class Steine {
      */
     public static void initialisiereSpielfeld(int a, int b) {
         spielfeld = createEmpty2DCharArray(a, b);
-        //sv.step(spielfeld);
+        sv.step(spielfeld);
     }
 
     public static void zeichneI(int posX, int posY, boolean vertikal) {
@@ -28,10 +30,6 @@ public class Steine {
             if (posY + 3 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 4;
             }
-            spielfeld[posX][posY] = '6';
-            spielfeld[posX][posY+1] = '6';
-            spielfeld[posX][posY+2] = '6';
-            spielfeld[posX][posY+3] = '6';
             steinx[0] = posX;
             steiny[0] = posY+3;
             steinx[1] = posX;
@@ -44,10 +42,6 @@ public class Steine {
             if (posX + 3 >= spielfeld.length) {
                 posX = spielfeld.length - 4;
             }
-            spielfeld[posX][posY] = '6';
-            spielfeld[posX+1][posY] = '6';
-            spielfeld[posX+2][posY] = '6';
-            spielfeld[posX+3][posY] = '6';
             steinx[0] = posX;
             steiny[0] = posY;
             steinx[1] = posX+1;
@@ -56,7 +50,20 @@ public class Steine {
             steiny[2] = posY;
             steinx[3] = posX+3;
             steiny[3] = posY;
+
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '6';
+            spielfeld[steinx[1]][steiny[1]] = '6';
+            spielfeld[steinx[2]][steiny[2]] = '6';
+            spielfeld[steinx[3]][steiny[3]] = '6';
+        }
+
     }
 
     public static void zeichneO(int posX, int posY) {
@@ -66,10 +73,25 @@ public class Steine {
         if (posY + 1 >= spielfeld[posX].length) {
             posY = spielfeld[posX].length - 2;
         }
-        spielfeld[posX][posY] = '5';
-        spielfeld[posX+1][posY] = '5';
-        spielfeld[posX][posY+1] = '5';
-        spielfeld[posX+1][posY+1] = '5';
+        steinx[0] = posX;
+        steiny[0] = posY;
+        steinx[1] = posX+1;
+        steiny[1] = posY;
+        steinx[2] = posX;
+        steiny[2] = posY+1;
+        steinx[3] = posX+1;
+        steiny[3] = posY+1;
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '5';
+            spielfeld[steinx[1]][steiny[1]] = '5';
+            spielfeld[steinx[2]][steiny[2]] = '5';
+            spielfeld[steinx[3]][steiny[3]] = '5';
+        }
     }
 
     public static void zeichneT(int posX, int posY, int rotation) {
@@ -80,10 +102,14 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX+1][posY] = '7';
-            spielfeld[posX][posY+1] = '7';
-            spielfeld[posX+1][posY+1] = '7';
-            spielfeld[posX+2][posY+1] = '7';
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+1;
+            steinx[3] = posX+2;
+            steiny[3] = posY+1;
         } else if (rotation % 2 != 0 && rotation <= 0) {
             if (posX + 2 >= spielfeld.length) {
                 posX = spielfeld.length - 3;
@@ -91,21 +117,29 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX][posY] = '7';
-            spielfeld[posX+1][posY] = '7';
-            spielfeld[posX+2][posY] = '7';
-            spielfeld[posX+1][posY+1] = '7';
-        } else if (rotation % 2 == 0 && rotation >= 0) {
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY;
+            steinx[2] = posX+2;
+            steiny[2] = posY;
+            steinx[3] = posX+1;
+            steiny[3] = posY+1;
+            } else if (rotation % 2 == 0 && rotation >= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
             }
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX][posY] = '7';
-            spielfeld[posX][posY+1] = '7';
-            spielfeld[posX][posY+2] = '7';
-            spielfeld[posX+1][posY+1] = '7';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX;
+            steiny[2] = posY+2;
+            steinx[3] = posX+1;
+            steiny[3] = posY+1;
         } else if (rotation % 2 == 0 && rotation <= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
@@ -113,11 +147,27 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX+1][posY] = '7';
-            spielfeld[posX+1][posY+1] = '7';
-            spielfeld[posX+1][posY+2] = '7';
-            spielfeld[posX][posY+1] = '7';
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+2;
+            steinx[3] = posX;
+            steiny[3] = posY+1;
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '7';
+            spielfeld[steinx[1]][steiny[1]] = '7';
+            spielfeld[steinx[2]][steiny[2]] = '7';
+            spielfeld[steinx[3]][steiny[3]] = '7';
+        }
+
     }
 
     public static void zeichneS(int posX, int posY, boolean vertikal) {
@@ -128,11 +178,14 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX][posY] = '9';
-            spielfeld[posX][posY+1] = '9';
-            spielfeld[posX+1][posY+1] = '9';
-            spielfeld[posX+1][posY+2] = '9';
-
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+1;
+            steinx[3] = posX+1;
+            steiny[3] = posY+2;
         } else {
             if (posX + 2 >= spielfeld.length) {
                 posX = spielfeld.length - 3;
@@ -140,11 +193,27 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX+1][posY] = '9';
-            spielfeld[posX+2][posY] = '9';
-            spielfeld[posX][posY+1] = '9';
-            spielfeld[posX+1][posY+1] = '9';
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX+2;
+            steiny[1] = posY;
+            steinx[2] = posX;
+            steiny[2] = posY+1;
+            steinx[3] = posX+1;
+            steiny[3] = posY+1;
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '9';
+            spielfeld[steinx[1]][steiny[1]] = '9';
+            spielfeld[steinx[2]][steiny[2]] = '9';
+            spielfeld[steinx[3]][steiny[3]] = '9';
+        }
+
     }
 
     public static void zeichneZ(int posX, int posY, boolean vertikal) {
@@ -155,12 +224,14 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-
-            spielfeld[posX+1][posY] = '4';
-            spielfeld[posX+1][posY+1] = '4';
-            spielfeld[posX][posY+1] = '4';
-            spielfeld[posX][posY+2] = '4';
-
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY+1;
+            steinx[2] = posX;
+            steiny[2] = posY+1;
+            steinx[3] = posX;
+            steiny[3] = posY+2;
         } else {
             if (posX + 2 >= spielfeld.length) {
                 posX = spielfeld.length - 3;
@@ -168,11 +239,27 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX][posY] = '4';
-            spielfeld[posX+1][posY] = '4';
-            spielfeld[posX+1][posY+1] = '4';
-            spielfeld[posX+2][posY+1] = '4';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY;
+            steinx[2] = posX+1;
+            steiny[2] = posY+1;
+            steinx[3] = posX+2;
+            steiny[3] = posY+1;
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '4';
+            spielfeld[steinx[1]][steiny[1]] = '4';
+            spielfeld[steinx[2]][steiny[2]] = '4';
+            spielfeld[steinx[3]][steiny[3]] = '4';
+        }
+
     }
 
     public static void zeichneJ(int posX, int posY, int rotation) {
@@ -183,10 +270,14 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX][posY] = '2';
-            spielfeld[posX][posY+1] = '2';
-            spielfeld[posX+1][posY+1] = '2';
-            spielfeld[posX+2][posY+1] = '2';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+1;
+            steinx[3] = posX+2;
+            steiny[3] = posY+1;
         } else if (rotation % 2 != 0 && rotation <= 0) {
             if (posX + 2 >= spielfeld.length) {
                 posX = spielfeld.length - 3;
@@ -194,10 +285,14 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX][posY] = '2';
-            spielfeld[posX+1][posY] = '2';
-            spielfeld[posX+2][posY] = '2';
-            spielfeld[posX+2][posY+1] = '2';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY;
+            steinx[2] = posX+2;
+            steiny[2] = posY;
+            steinx[3] = posX+2;
+            steiny[3] = posY+1;
         } else if (rotation % 2 == 0 && rotation >= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
@@ -205,10 +300,14 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX][posY] = '2';
-            spielfeld[posX][posY+1] = '2';
-            spielfeld[posX][posY+2] = '2';
-            spielfeld[posX+1][posY] = '2';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX;
+            steiny[2] = posY+2;
+            steinx[3] = posX+1;
+            steiny[3] = posY;
         } else if (rotation % 2 == 0 && rotation <= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
@@ -216,11 +315,27 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX+1][posY] = '2';
-            spielfeld[posX+1][posY+1] = '2';
-            spielfeld[posX+1][posY+2] = '2';
-            spielfeld[posX][posY+2] = '2';
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+2;
+            steinx[3] = posX;
+            steiny[3] = posY+2;
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = '2';
+            spielfeld[steinx[1]][steiny[1]] = '2';
+            spielfeld[steinx[2]][steiny[2]] = '2';
+            spielfeld[steinx[3]][steiny[3]] = '2';
+        }
+
     }
 
     public static void zeichneL(int posX, int posY, int rotation) {
@@ -231,10 +346,14 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX+2][posY] = 'A';
-            spielfeld[posX][posY+1] = 'A';
-            spielfeld[posX+1][posY+1] = 'A';
-            spielfeld[posX+2][posY+1] = 'A';
+            steinx[0] = posX+2;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+1;
+            steinx[3] = posX+2;
+            steiny[3] = posY+1;
         } else if (rotation % 2 != 0 && rotation <= 0) {
             if (posX + 2 >= spielfeld.length) {
                 posX = spielfeld.length - 3;
@@ -242,10 +361,14 @@ public class Steine {
             if (posY + 1 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 2;
             }
-            spielfeld[posX][posY] = 'A';
-            spielfeld[posX+1][posY] = 'A';
-            spielfeld[posX+2][posY] = 'A';
-            spielfeld[posX][posY+1] = 'A';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY;
+            steinx[2] = posX+2;
+            steiny[2] = posY;
+            steinx[3] = posX;
+            steiny[3] = posY+1;
         } else if (rotation % 2 == 0 && rotation >= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
@@ -253,10 +376,14 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX][posY] = 'A';
-            spielfeld[posX][posY+1] = 'A';
-            spielfeld[posX][posY+2] = 'A';
-            spielfeld[posX+1][posY+2] = 'A';
+            steinx[0] = posX;
+            steiny[0] = posY;
+            steinx[1] = posX;
+            steiny[1] = posY+1;
+            steinx[2] = posX;
+            steiny[2] = posY+2;
+            steinx[3] = posX+1;
+            steiny[3] = posY+2;
         } else if (rotation % 2 == 0 && rotation <= 0) {
             if (posX + 1 >= spielfeld.length) {
                 posX = spielfeld.length - 2;
@@ -264,42 +391,155 @@ public class Steine {
             if (posY + 2 >= spielfeld[posX].length) {
                 posY = spielfeld[posX].length - 3;
             }
-            spielfeld[posX+1][posY] = 'A';
-            spielfeld[posX+1][posY+1] = 'A';
-            spielfeld[posX+1][posY+2] = 'A';
-            spielfeld[posX][posY] = 'A';
+            steinx[0] = posX+1;
+            steiny[0] = posY;
+            steinx[1] = posX+1;
+            steiny[1] = posY+1;
+            steinx[2] = posX+1;
+            steiny[2] = posY+2;
+            steinx[3] = posX;
+            steiny[3] = posY;
         }
+        for (int i = 0; i < steinx.length; i++) {
+            if (spielfeld[steinx[i]][steiny[i]] != ' ') {
+                lose = true;
+            }
+        }
+        if (!lose) {
+            spielfeld[steinx[0]][steiny[0]] = 'A';
+            spielfeld[steinx[1]][steiny[1]] = 'A';
+            spielfeld[steinx[2]][steiny[2]] = 'A';
+            spielfeld[steinx[3]][steiny[3]] = 'A';
+        }
+
     }
 
     public static void zufallsStein() {
         int z = zufallGanz(1,7);
-        int posX = zufallGanz(spielfeld.length);
-        int posY = 0;
+        int r;
+        boolean v;
         switch(z) {
             case 1:
-                zeichneI(posX, posY, zufallGanz(1,2) % 2 == 0);
+                v = zufallGanz(1,2) % 2 == 0;
+                if (v) {
+                    zeichneI(zufallGanz(spielfeld.length-1), 0, v);
+                } else {
+                    zeichneI(zufallGanz(spielfeld.length-4), 0, v);
+                }
                 break;
             case 2:
-                zeichneJ(posX, posY, rot[zufallGanz(rot.length-1)]);
+                r = rot[zufallGanz(rot.length-1)];
+                if (r < 0) {
+                    zeichneJ(zufallGanz(spielfeld.length - 2), 0, r);
+                } else {
+                    zeichneJ(zufallGanz(spielfeld.length - 3), 0, r);
+                }
                 break;
             case 3:
-                zeichneL(posX, posY, rot[zufallGanz(rot.length-1)]);
+                r = rot[zufallGanz(rot.length-1)];
+                if (r < 0) {
+                    zeichneL(zufallGanz(spielfeld.length - 2), 0, r);
+                } else {
+                    zeichneL(zufallGanz(spielfeld.length - 3), 0, r);
+                }
                 break;
             case 4:
-                zeichneO(posX, posY);
+                zeichneO(zufallGanz(spielfeld.length-2), 0);
                 break;
             case 5:
-                zeichneS(posX, posY, zufallGanz(1,2) % 2 == 0);
+                v = zufallGanz(1,2) % 2 == 0;
+                if (v) {
+                    zeichneS(zufallGanz(spielfeld.length-2), 0, v);
+                } else {
+                    zeichneS(zufallGanz(spielfeld.length-3), 0, v);
+                }
                 break;
             case 6:
-                zeichneZ(posX, posY, zufallGanz(1,2) % 2 == 0);
+                v = zufallGanz(1,2) % 2 == 0;
+                if (v) {
+                    zeichneZ(zufallGanz(spielfeld.length-2), 0, v);
+                } else {
+                    zeichneI(zufallGanz(spielfeld.length-3), 0, v);
+                }
                 break;
             case 7:
-                zeichneT(posX, posY, rot[zufallGanz(rot.length-1)]);
+                r = rot[zufallGanz(rot.length-1)];
+                if (r < 0) {
+                    zeichneT(zufallGanz(spielfeld.length - 2), 0, r);
+                } else {
+                    zeichneT(zufallGanz(spielfeld.length - 3), 0, r);
+                }
+                break;
+        }
+        sv.step(spielfeld);
+    }
+
+    public static void fallen() {
+        char p = spielfeld[steinx[0]][steiny[0]];
+        boolean fall = true;
+        //int[] zs = new int[]{-1, -1, -1, -1};
+        for (int i = 0; i < steinx.length; i++) {
+            int z = steinx[i];
+            int max = 0;
+            for (int j = 0; j < steinx.length; j++) {
+                if (steinx[j] == z && steiny[j] > steiny[max]) {
+                    max = j;
+                }
+            }
+            if (getSueden(spielfeld, steinx[max], steiny[max], false) != ' ') {
+                fall = false;
+            }
+        }
+        if (fall) {
+            spielfeld[steinx[0]][steiny[0]] = ' ';
+            spielfeld[steinx[1]][steiny[1]] = ' ';
+            spielfeld[steinx[2]][steiny[2]] = ' ';
+            spielfeld[steinx[3]][steiny[3]] = ' ';
+            for (int i = 0; i < steiny.length; i++) {
+                if (steiny[i] + 1 >= spielfeld.length) {
+                    fall = false;
+                    break;
+                }
+            }
+            steiny[0]++;
+            steiny[1]++;
+            steiny[2]++;
+            steiny[3]++;
+            spielfeld[steinx[0]][steiny[0]] = p;
+            spielfeld[steinx[1]][steiny[1]] = p;
+            spielfeld[steinx[2]][steiny[2]] = p;
+            spielfeld[steinx[3]][steiny[3]] = p;
+            sv.step(spielfeld);
+        }
+        if (fall == false){
+            istGefallen = true;
+        }
+    }
+
+    public static void tetoris() {      //https://www.youtube.com/watch?v=Soy4jGPHr3g&list=RDSoy4jGPHr3g&start_radio=1
+        int i = 0;
+        while (true) {
+            zufallsStein();
+            while (!istGefallen) {
+                fallen();
+            }
+            istGefallen = false;
+            i++;
+            if (i > 100) {
+                break;
+            }
         }
     }
 
     public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+            initialisiereSpielfeld(10, 40);
+            zufallsStein();
+            fallen();
+        }
+        sv.start();
+
+
         /*
         initialisiereSpielfeld(10, 40);
         sv.step(spielfeld);
@@ -371,12 +611,6 @@ public class Steine {
             zeichneL(80, 0, rot[i]);
             sv.step(spielfeld);
         }
-        */
-        for (int i = 0; i < 20; i++) {
-            initialisiereSpielfeld(10, 40);
-            zufallsStein();
-            sv.step(spielfeld);
-        }
-        sv.start();
+         */
     }
 }
