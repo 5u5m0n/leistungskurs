@@ -14,11 +14,19 @@ public class OasenSuche {
     static SchischVisualizer sv = new SchischVisualizer();
     static int energiewert = 50;
 
+    /**
+     * Initialisiert das Spielfeld
+     * @param a Breite
+     * @param b Höhe
+     */
     public static void initialisiereSpielfeld(int a, int b) {
         spielfeld = createEmpty2DCharArray(a, b);
         sv.step(spielfeld);
     }
 
+    /**
+     * Platziert den Spieler auf einer Zufälligen Position auf dem Spielfeld
+     */
     public static void zufallsPositionSpieler() {
         if (spielfeld != null) {
             playerX = zufallGanz(spielfeld.length - 1);
@@ -28,6 +36,10 @@ public class OasenSuche {
         sv.step(spielfeld);
     }
 
+    /**
+     * Platziert Wasser zufällig auf dem Spielfeld
+     * @param p Wahrscheinlichkeit (0-1)
+     */
     public static void wasserZufall(double p) {
         if (spielfeld != null && p >= 0 && p <= 1) {
             for (int i = 0; i < spielfeld.length; i++) {
@@ -41,6 +53,10 @@ public class OasenSuche {
         sv.step(spielfeld);
     }
 
+    /**
+     * Platziert Steine zufällig auf dem Spielfeld
+     * @param p Wahrscheinlichkeit (0-1)
+     */
     public static void steinZufall(double p) {
         if (spielfeld != null && p >= 0 && p <= 1) {
             for (int i = 0; i < spielfeld.length; i++) {
@@ -54,6 +70,9 @@ public class OasenSuche {
         sv.step(spielfeld);
     }
 
+    /**
+     * Führt den "Suchalgorithmus" durch
+     */
     public static void findeWasser() {
         if (spielfeld != null) {
             boolean w = true;

@@ -56,7 +56,7 @@ public class Simulationen {
             if (rand) {
                 ys = chars[x].length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[x][ys];
@@ -77,7 +77,7 @@ public class Simulationen {
             if (rand) {
                 ys = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[x][ys];
@@ -98,7 +98,7 @@ public class Simulationen {
             if (rand) {
                 xs = chars.length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][y];
@@ -119,7 +119,7 @@ public class Simulationen {
             if (rand) {
                 xs = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][y];
@@ -140,7 +140,7 @@ public class Simulationen {
             if (rand) {
                 ys = chars[x].length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         int xs = x - 1;
@@ -148,7 +148,7 @@ public class Simulationen {
             if (rand) {
                 xs = chars.length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][ys];
@@ -169,7 +169,7 @@ public class Simulationen {
             if (rand) {
                 ys = chars[x].length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         int xs = x + 1;
@@ -177,7 +177,7 @@ public class Simulationen {
             if (rand) {
                 xs = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][ys];
@@ -198,7 +198,7 @@ public class Simulationen {
             if (rand) {
                 ys = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         int xs = x - 1;
@@ -206,7 +206,7 @@ public class Simulationen {
             if (rand) {
                 xs = chars.length - 1;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][ys];
@@ -227,7 +227,7 @@ public class Simulationen {
             if (rand) {
                 ys = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         int xs = x + 1;
@@ -235,7 +235,7 @@ public class Simulationen {
             if (rand) {
                 xs = 0;
             } else {
-                return ' ';
+                return '-';
             }
         }
         char s = chars[xs][ys];
