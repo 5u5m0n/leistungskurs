@@ -2,6 +2,7 @@ package blatt14;
 
 import schisch_visualizer.SchischVisualizer;
 
+import static blatt07.ArbeitMitArrays.*;
 import static blatt14.MultiArrays.*;
 import static blatt13.Zufall.*;
 import static blatt14.Simulationen.*;
@@ -478,6 +479,7 @@ public class Steine {
         char p = spielfeld[steinx[0]][steiny[0]];
         boolean fall = true;
         //int[] zs = new int[]{-1, -1, -1, -1};
+        /*
         for (int i = 0; i < steinx.length; i++) {
             int z = steinx[i];
             int max = 0;
@@ -490,17 +492,23 @@ public class Steine {
                 fall = false;
             }
         }
-        if (fall) {
-            spielfeld[steinx[0]][steiny[0]] = ' ';
-            spielfeld[steinx[1]][steiny[1]] = ' ';
-            spielfeld[steinx[2]][steiny[2]] = ' ';
-            spielfeld[steinx[3]][steiny[3]] = ' ';
-            for (int i = 0; i < steiny.length; i++) {
-                if (steiny[i] + 1 >= spielfeld.length) {
-                    fall = false;
-                    break;
-                }
+         */
+
+        spielfeld[steinx[0]][steiny[0]] = ' ';
+        spielfeld[steinx[1]][steiny[1]] = ' ';
+        spielfeld[steinx[2]][steiny[2]] = ' ';
+        spielfeld[steinx[3]][steiny[3]] = ' ';
+        for (int i = 0; i < steiny.length; i++) {
+            if (steiny[i] + 1 >= spielfeld[i].length) {
+                fall = false;
+                break;
             }
+            if (spielfeld[steinx[i]][steiny[i] + 1] != ' ') {
+                fall = false;
+                break;
+            }
+        }
+        if (fall) {
             steiny[0]++;
             steiny[1]++;
             steiny[2]++;
@@ -510,33 +518,52 @@ public class Steine {
             spielfeld[steinx[2]][steiny[2]] = p;
             spielfeld[steinx[3]][steiny[3]] = p;
             sv.step(spielfeld);
-        }
-        if (fall == false){
+        } else {
+            spielfeld[steinx[0]][steiny[0]] = p;
+            spielfeld[steinx[1]][steiny[1]] = p;
+            spielfeld[steinx[2]][steiny[2]] = p;
+            spielfeld[steinx[3]][steiny[3]] = p;
             istGefallen = true;
         }
     }
 
+    //public static int
+
+    public static void shiftDown(int n, int s) {
+        for (int i = 0; i < spielfeld.length; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = s; k > 0; k--) {
+                    spielfeld[i][k] = spielfeld[i][k - 1];
+                }
+                spielfeld[i][0] = ' ';
+            }
+        }
+        sv.step(spielfeld);
+    }
+
     public static void tetoris() {      //https://www.youtube.com/watch?v=Soy4jGPHr3g&list=RDSoy4jGPHr3g&start_radio=1
-        int i = 0;
+        int n = 0;
         while (true) {
             zufallsStein();
+            if (lose) {
+                break;
+            }
             while (!istGefallen) {
                 fallen();
             }
             istGefallen = false;
-            i++;
-            if (i > 100) {
-                break;
-            }
         }
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            initialisiereSpielfeld(10, 40);
+        initialisiereSpielfeld(10, 40);
+        for (int i = 1; i <= 10; i++) {
             zufallsStein();
-            fallen();
         }
+        shiftDown(1, spielfeld[0].length-1);
+        shiftDown(2, spielfeld[0].length-1);
+        shiftDown(3, spielfeld[0].length-1);
+        shiftDown(4, spielfeld[0].length-1);
         sv.start();
 
 
