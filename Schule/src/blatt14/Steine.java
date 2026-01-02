@@ -527,8 +527,6 @@ public class Steine {
         }
     }
 
-    //public static int
-
     public static void shiftDown(int s) {
         for (int i = 0; i < spielfeld.length; i++) {
             for (int k = s; k > 0; k--) {
@@ -545,6 +543,7 @@ public class Steine {
             for (int j = 0; j < spielfeld.length; j++) {
                 if (spielfeld[j][i] == ' ') {
                     voll = false;
+                    break;
                 }
             }
             if (voll) {
