@@ -529,20 +529,32 @@ public class Steine {
 
     //public static int
 
-    public static void shiftDown(int n, int s) {
+    public static void shiftDown(int s) {
         for (int i = 0; i < spielfeld.length; i++) {
-            for (int j = 0; j < n; j++) {
-                for (int k = s; k > 0; k--) {
-                    spielfeld[i][k] = spielfeld[i][k - 1];
+            for (int k = s; k > 0; k--) {
+                spielfeld[i][k] = spielfeld[i][k - 1];
+            }
+            spielfeld[i][0] = ' ';
+        }
+    }
+
+    public static void reihenEntfernen() {
+        boolean voll;
+        for (int i = 0; i < spielfeld[0].length; i++) {
+            voll = true;
+            for (int j = 0; j < spielfeld.length; j++) {
+                if (spielfeld[j][i] == ' ') {
+                    voll = false;
                 }
-                spielfeld[i][0] = ' ';
+            }
+            if (voll) {
+                shiftDown(i);
             }
         }
         sv.step(spielfeld);
     }
 
-    public static void tetoris() {      //https://www.youtube.com/watch?v=Soy4jGPHr3g&list=RDSoy4jGPHr3g&start_radio=1
-        int n = 0;
+    public static void tetris() {
         while (true) {
             zufallsStein();
             if (lose) {
@@ -551,93 +563,14 @@ public class Steine {
             while (!istGefallen) {
                 fallen();
             }
+            reihenEntfernen();
             istGefallen = false;
         }
     }
 
     public static void main(String[] args) {
         initialisiereSpielfeld(10, 40);
-        for (int i = 1; i <= 10; i++) {
-            zufallsStein();
-        }
-        shiftDown(1, spielfeld[0].length-1);
-        shiftDown(2, spielfeld[0].length-1);
-        shiftDown(3, spielfeld[0].length-1);
-        shiftDown(4, spielfeld[0].length-1);
+        tetris();
         sv.start();
-
-
-        /*
-        initialisiereSpielfeld(10, 40);
-        sv.step(spielfeld);
-        zeichneI(0, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneI(0, 0, true);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneI(80, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneO(0, 0);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneO(80, 0);
-        sv.step(spielfeld);
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneT(0, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneT(80, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-        initialisiereSpielfeld(10, 40);
-        zeichneS(0, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneS(0, 0, true);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneS(80, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneS(80, 0, true);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneZ(0, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneZ(0, 0, true);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneZ(80, 0, false);
-        sv.step(spielfeld);
-        initialisiereSpielfeld(10, 40);
-        zeichneZ(80, 0, true);
-        sv.step(spielfeld);
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneJ(0, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneJ(80, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneL(0, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-        for (int i = 0; i < rot.length; i++) {
-            initialisiereSpielfeld(10, 40);
-            zeichneL(80, 0, rot[i]);
-            sv.step(spielfeld);
-        }
-         */
     }
 }
