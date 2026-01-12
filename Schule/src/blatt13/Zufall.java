@@ -19,7 +19,7 @@ public class Zufall {
      * @return Zahl
      */
     public static int zufallGanz(int b) {
-        return (int) Math.round(Math.random() * b);
+        return (int) Math.random() * (b+1);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Zufall {
      * @return Zahl
      */
     public static int zufallGanz(int a, int b) {
-        return (int) Math.round(Math.random() * Math.abs(b-a) + a);
+        return (int) (Math.random() * (Math.abs(b-a) + 1)) + a;
     }
 
     /**
