@@ -7,7 +7,7 @@ public class SelectionSort {
     /**
      * Sortiert einen gegebenen int-Array von groß nach klein (max-Sort) oder klein nach groß (min-Sort)
      * @param arr int-Array
-     * @param max true: max-Sort, false; min-Sort
+     * @param max true: max-Sort, false: min-Sort
      */
     public static void selectionSort(int[] arr, boolean max) {
         for (int i = 0; i < arr.length; i++) {
