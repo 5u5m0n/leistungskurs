@@ -13,7 +13,6 @@ public class Kaese {
     static boolean undicht = false;
     static boolean laeuft = true;
     static char[][] kaeseB;
-    static boolean change = false;
 
     public static void initialisiereKaese(int a, int b, double p) {
         kaese = createEmpty2DCharArray(a, b);
@@ -39,55 +38,50 @@ public class Kaese {
     }
 
     public static void gravitation() {
-        kaeseB = createEmpty2DCharArray(kaese.length, kaese[0].length);
-        change = false;
+        kaeseB = copy2DCharArray(kaese);
         for (int i = 0; i < kaese.length; i++) {
             for (int j = 0; j < kaese[i].length; j++) {
                 if (kaese[i][j] == '2' && getSueden(kaese, i, j, false) == ' ') {
                     kaeseB[i][j + 1] = '2';
-                    change = true;
                 }
                 if (kaese[i][j] == '2' && getOsten(kaese, i, j, false) == ' ') {
                     kaeseB[i + 1][j] = '2';
-                    change = true;
                 }
                 if (kaese[i][j] == '2' && getWesten(kaese, i, j, false) == ' ') {
                     kaeseB[i - 1][j] = '2';
-                    change = true;
+                }
+                if (kaese[i][j] == '2' && getNorden(kaese, i, j, false) == ' ') {
+                    kaeseB[i][j-1] = '2';
                 }
             }
-            for (int j = 0; j < kaese[kaese.length - 1].length; j++) {
-                if (kaese[kaese.length - 1][j] == '2') {
-                    laeuft = false;
-                    undicht = true;
-                }
-            }
+
         }
-        for (int i = 0; i < kaese.length; i++) {
-            for (int j = 0; j < kaese[i].length; j++) {
-                if (kaeseB[i][j] == '2') {
-                    kaese[i][j] = kaeseB[i][j];
-                }
-            }
-        }
-        if (!change) {
+        if (istIdentisch(kaese, kaeseB)) {
             laeuft = false;
+        } else {
+            kaese = copy2DCharArray(kaeseB);
         }
+
         sv.step(kaese);
     }
 
-    public static void simulation() {
-        initialisiereKaese(20, 20, 0.6);
+    public static void simulation(int a, int b, double p) {
+        initialisiereKaese(a, b, p);
         initialisiereWasser();
         while (laeuft) {
             gravitation();
+        }
+        for (int i = 0; i < kaese.length; i++) {
+            if (kaese[i][kaese[i].length - 1] == '2') {
+                undicht = true;
+            }
         }
         System.out.println("Undicht: " + undicht);
 
     }
 
     public static void main(String[] args) {
-        simulation();
+        simulation(500, 250, 0.4);
         sv.start();
     }
 }
