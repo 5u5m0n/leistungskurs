@@ -65,38 +65,73 @@ public class Farben {
 
     public static void respawn(int spielernummer) {
         if (spielernummer >= 0 && spielernummer <= 7) {
-            boolean c = false;
             char[] f = new char[]{'7', '7', '7', '7', '9', '9', '9', '9'};
-            for (int i = 0; i < spielfeld.length; i++) {
-                for (int j = 0; j < spielfeld[i].length; j++) {
-                    if (spielfeld[i][j] == f[spielernummer]) {
-                        c = true;
+            int[] team = new int[]{1, 1, 1, 1, 2, 2, 2, 2};
+            int sp = 0;
+            for (int i = 1; i < 4; i++) {
+                if (team[spielernummer] == 1 && spielerPosX[i] > -1) {
+                    sp++;
+                } else if (team[spielernummer] == 2 && spielerPosX[i + 4] > -1) {
+                    sp++;
+                }
+            }
+            int n = zaehlen(team[spielernummer]) - sp;
+            if (n > 0) {
+                int[][] p = new int[n][2];
+                int k = 0;
+                for (int i = 0; i < spielfeld.length; i++) {
+                    for (int j = 0; j < spielfeld[i].length; j++) {
+                        if (spielfeld[i][j] == f[spielernummer]) {
+                            if (k < p.length) {
+                                p[k][0] = i;
+                                p[k][1] = j;
+                                k++;
+                            }
+                        }
+                    }
+                }
+                print2DArray(p);
+                int z = zufallGanz(0, p.length);
+                System.out.println(z);
+                spielerPosX[spielernummer] = p[z][0];
+                spielerPosY[spielernummer] = p[z][1];
+            } else {
+                while (true) {
+                    spielerPosX[spielernummer] = zufallGanz(1, spielfeld.length - 1);
+                    spielerPosY[spielernummer] = zufallGanz(1, spielfeld[0].length - 1);
+                    if (spielfeld[spielerPosX[spielernummer]][spielerPosY[spielernummer]] != 'P' && spielfeld[spielerPosX[spielernummer]][spielerPosY[spielernummer]] != '8') {
+                        break;
                     }
                 }
             }
-            while (true && c) {
-                spielerPosX[spielernummer] = zufallGanz(1, spielfeld.length-2);
-                spielerPosY[spielernummer] = zufallGanz(1, spielfeld[0].length-2);
-                if (spielfeld [spielerPosX[spielernummer]][spielerPosY[spielernummer]] == f[spielernummer]) {
-                    spielfeld [spielerPosX[spielernummer]][spielerPosY[spielernummer]] = 'P';
-                    break;
-                }
-            }
-            while (!c) {
-                spielerPosX[spielernummer] = zufallGanz(1, spielfeld.length-2);
-                spielerPosY[spielernummer] = zufallGanz(1, spielfeld[0].length-2);
-                if (spielfeld [spielerPosX[spielernummer]][spielerPosY[spielernummer]] != 'P') {
-                    spielfeld [spielerPosX[spielernummer]][spielerPosY[spielernummer]] = 'P';
-                    c = true;
-                }
-            }
-
+            spielfeld[spielerPosX[spielernummer]][spielerPosY[spielernummer]] = 'P';
+            sv.step(spielfeld);
         }
     }
 
     public static void main(String[] args) {
         initialisiereSpielfeld(80, 80);
-        startPositionen();
+        /*
+        for (int i = 0; i < spielfeld.length; i++) {
+
+            for (int j = 0; j < spielfeld[i].length; j++) {
+                if (zufall(0, 1) < 0.5) {
+                    spielfeld[i][j] = '7';
+                } else if (zufall(0, 1) < 0.5) {
+                    spielfeld[i][j] = '9';
+                }
+            }
+        }
+
+         */
+        spielfeld[12][34] = '7';
+        spielfeld[59][38] = '7';
+        sv.step(spielfeld);
+        for (int i = 0; i < 8; i++) {
+            spielerPosX[i] = -1;
+            spielerPosY[i] = -1;
+            respawn(i);
+        }
         sv.start();
     }
 }
