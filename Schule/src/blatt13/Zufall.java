@@ -19,7 +19,7 @@ public class Zufall {
      * @return Zahl
      */
     public static int zufallGanz(int b) {
-        return (int) Math.random() * (b+1);
+        return (int) (Math.random() * (b)) + 1;
     }
 
     /**
@@ -58,6 +58,5 @@ public class Zufall {
     }
 
     public static void main(String[] args) {
-        printArray(zufallArray((int) Math.pow(10, 8), 1, 3));
     }
 }
