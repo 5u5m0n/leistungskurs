@@ -544,48 +544,6 @@ public class Farben {
     }
 
     public static void main(String[] args) {
-        initialisiereSpielfeld(40, 40);
-        /*
-        startPositionen();
-        for (int i = 0; i < 4; i++) {
-            reihenfolge();
-            for (int j = 0; j < reihenfolge.length; j++) {
-                if (reihenfolge[j] < 4) {
-                    zugEins(reihenfolge[j]);
-                } else {
-                    zugZwei(reihenfolge[j]);
-                }
-            }
-        }
-
-         */
-        /*
-        spielfeld[2][38] = 'P';
-        spielerPosX[0] = 2;
-        spielerPosY[0] = 38;
-        sv.step(spielfeld);
-        for (int i = 0; i < 8; i++) {
-            char[] charr = sichtfeld(0);
-            printArray(charr);
-            if (charr[3] == '8') {
-                move(0, 1);
-            } else {
-                move(0, 4);
-            }
-            sv.step(spielfeld);
-        }
-
-         */
-        /*
-        startPositionen();
-        for (int i = 0; i < 400; i++) {
-            System.out.print((i+3));
-            zugEins(0);
-
-        }
-        sv.start();
-
-         */
         simulation(40, 40, 400);
     }
 }
