@@ -50,7 +50,7 @@ public class Spiegel {
     }
 
     public static void main(String[] args) {
-        spiegelSimulation(100, 0.5, 4);
+        spiegelSimulation(100, 0.5, 4 );
     }
 
 }
