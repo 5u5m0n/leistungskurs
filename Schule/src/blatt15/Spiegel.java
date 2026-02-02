@@ -42,8 +42,8 @@ public class Spiegel {
         SchischVisualizer sv = new SchischVisualizer();
         zufallSpiegel(spiegel, 0.3, 40);
         sv.step(spiegel);
-        zufallZiele(spiegel, 0.1);
-        sv.step(spiegel);
+        //zufallZiele(spiegel, 0.1);
+        //sv.step(spiegel);
         generierePfeil(spiegel);
         sv.step(spiegel);
         sv.start();
