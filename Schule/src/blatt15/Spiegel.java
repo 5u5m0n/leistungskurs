@@ -51,8 +51,7 @@ public class Spiegel {
         return '0';
     }
 
-    //TODO: FIX DAS PROGRAMM!
-    public static void bewegePfeile(char[][] spiegel) {
+    public static char[][] bewegePfeile(char[][] spiegel) {
         /*
                 1
             2   /   -1   == Wenn dir = 1 || dir = -2 : - (-1); Else : + (-1)
@@ -63,6 +62,7 @@ public class Spiegel {
                -2
          */
         int dir = 0;
+        char[][] spiegelKopie = copy2DCharArray(spiegel);
         for (int i = 0; i < spiegel.length; i++) {
             for (int j = 0; j < spiegel[i].length; j++) {
                 dir = 0;
@@ -72,47 +72,48 @@ public class Spiegel {
                     dir = -1;
                 } else if (spiegel[i][j] == '^') {
                     dir = -2;
-                }  else if (spiegel[i][j] == 'V') {
+                } else if (spiegel[i][j] == 'V') {
                     dir = 1;
                 }
                 if (dir != 0) {
                     char feld = getDirection(spiegel, dir, i, j);
-                    System.out.println(feld);
                     int[] mx = new int[]{0, -1, 0, 0, 1};
                     int[] my = new int[]{1, 0, 0, -1, 0};
                     char[] zeichen = new char[]{'^', '<', '0', 'V', '>'};
                     if (i + mx[dir + 2] < spiegel.length && j + my[dir + 2] < spiegel[i].length && i + mx[dir + 2] > 0 && j + my[dir + 2] > 0) {
                         if (feld == ' ') {
-                            spiegel[i + mx[dir + 2]][j + my[dir + 2]] = spiegel[i][j];
-                            spiegel[i][j] = ' ';
+                            spiegelKopie[i + mx[dir + 2]][j + my[dir + 2]] = spiegel[i][j];
+                            spiegelKopie[i][j] = ' ';
                         } else if (feld == 'O') {
-                            spiegel[i + mx[dir + 2]][j + my[dir + 2]] = ' ';
-                            spiegel[i][j] = ' ';
+                            spiegelKopie[i + mx[dir + 2]][j + my[dir + 2]] = ' ';
+                            spiegelKopie[i][j] = ' ';
 
                         } else if (feld == '/') {
+                            spiegelKopie[i][j] = ' ';
+                            int x = i + mx[dir + 2];
+                            int y = j + my[dir + 2];
                             if (dir == 1 || dir == -2) {
                                 dir++;
                             } else {
                                 dir--;
                             }
-                            spiegel[i][j] = ' ';
-                            int x = i + mx[dir + 2];
-                            int y = j + my[dir + 2];
-                            spiegel[x + mx[dir + 2]][y + my[dir + 2]] = zeichen[dir + 2];
+                            spiegelKopie[x + mx[dir + 2]][y + my[dir + 2]] = zeichen[dir + 2];
                         } else if (feld == '\\') {
-                            dir *= -1;
-                            spiegel[i][j] = ' ';
+                            spiegelKopie[i][j] = ' ';
                             int x = i + mx[dir + 2];
                             int y = j + my[dir + 2];
-                            spiegel[x + mx[dir + 2]][y + my[dir + 2]] = zeichen[dir + 2];
+                            dir *= -1;
+                            spiegelKopie[x + mx[dir + 2]][y + my[dir + 2]] = zeichen[dir + 2];
                         } else {
-                            spiegel[i + mx[dir + 2]][j + my[dir + 2]] = ' ';
-                            spiegel[i][j] = ' ';
+                            spiegelKopie[i + mx[dir + 2]][j + my[dir + 2]] = ' ';
+                            spiegelKopie[i][j] = ' ';
                         }
                     }
                 }
             }
         }
+        spiegel = copy2DCharArray(spiegelKopie);
+        return spiegel;
     }
 
     public static void spiegelSimulation(int n, double q, int abs) {
@@ -123,7 +124,7 @@ public class Spiegel {
         zufallZiele(spiegel, 0.1);
         sv.step(spiegel);
         for (int i = 0; i < n; i++) {
-            bewegePfeile(spiegel);
+            spiegel = bewegePfeile(spiegel);
             if (i % abs == 0) {
                 generierePfeil(spiegel);
             }
