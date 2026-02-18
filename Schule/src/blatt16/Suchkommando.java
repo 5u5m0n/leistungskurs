@@ -11,25 +11,40 @@ public class Suchkommando {
     static boolean g = true;
 
     public static String[] suchen(String s) {
-        suchenOrdner("/", s);
+        suchenOrdner("/home", s);
         return arr;
     }
 
     public static void suchenOrdner(String f, String s) {
         File files = new File(f);
         File[] filesList = files.listFiles();
-        for (File file : filesList) {
-            System.out.println(file.getAbsolutePath());
-            if (file.getName().equals(s) && g) {
-                if (gefunden(file.getAbsolutePath())) {
+        try {
+            for (File file : filesList) {
+                System.out.println(file.getAbsolutePath());
+                if (file.getName().equals(s) && g) {
+                    if (gefunden(file.getAbsolutePath())) {
+                        break;
+                    }
+                } else if (file.isDirectory() && g && !file.getName().equals("z:") && !file.getName().equals("s:") && !file.getName().equals("sys")) {
+                    char[] path = file.getAbsolutePath().toCharArray();
+                    int n = 0;
+                    for (int i = 0; i < path.length; i++) {
+                        if (path[i] == '/') {
+                            n++;
+                        }
+                    }
+                    System.out.println(n);
+                    if (n <= 15) {
+                        suchenOrdner(file.getAbsolutePath(), s);
+                    }
+                } else if (!g) {
                     break;
                 }
-            } else if (file.isDirectory() && g && !file.getName().equals("z:") && !file.getName().equals("s:")) {
-                suchenOrdner(file.getAbsolutePath(), s);
-            } else if (!g) {
-                break;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     public static boolean gefunden(String f) {
@@ -56,6 +71,6 @@ public class Suchkommando {
     }
 
     public static void main(String[] args) {
-        printArray(suchen("ent_mux_interval_ms"));
+        printArray(suchen("Advanced Dungeons & Dragons_ Unearthed Arcana (1e).pdf"));
     }
 }
