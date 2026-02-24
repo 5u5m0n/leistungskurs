@@ -25,7 +25,7 @@ public class Suchkommando {
                     if (gefunden(file.getAbsolutePath())) {
                         break;
                     }
-                } else if (file.isDirectory() && g && !file.getName().equals("z:") && !file.getName().equals("s:") && !file.getName().equals("sys")) {
+                } else if (file.isDirectory() && g && !file.getName().equals("z:") && !file.getName().equals("s:")) {
                     char[] path = file.getAbsolutePath().toCharArray();
                     int n = 0;
                     for (int i = 0; i < path.length; i++) {
