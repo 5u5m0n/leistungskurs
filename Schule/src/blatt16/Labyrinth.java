@@ -26,26 +26,107 @@ public class Labyrinth {
                 }
             }
         }
-        if (x != -1) {
+        if (x != -1 || istMoeglich(labyrinth)) {
+            boolean win = false;
             labyrinth[x][y] = 'P';
             sv.step(labyrinth);
-            if (zaehlenVier(labyrinth, x, y, '0', false) == 1) {
-                labyrinth[x][y] = '8';
-                if (getNorden(labyrinth, x, y, false) == 0) {
-                    labyrinth[x][y - 1] = 'P';
-                } else if (getOsten(labyrinth, x, y, false) == 0) {
-                    labyrinth[x + 1][y] = 'P';
-                } else if (getSueden(labyrinth, x, y, false) == 0) {
-                    labyrinth[x][y + 1] = 'P';
-                } else if (getWesten(labyrinth, x, y, false) == 0) {
-                    labyrinth[x - 1][y] = 'P';
+            int n = 0;
+            while (!win) {
+                System.out.println(zaehlenVier(labyrinth, x, y, '0', false));
+                if (zaehlenVier(labyrinth, x, y, '0', false) == 1) {
+                    labyrinth[x][y] = '8';
+                    if (getNorden(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y - 1] = 'P';
+                        y--;
+                    } else if (getOsten(labyrinth, x, y, false) == '0') {
+                        labyrinth[x + 1][y] = 'P';
+                        x++;
+                    } else if (getSueden(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y + 1] = 'P';
+                        y++;
+                    } else if (getWesten(labyrinth, x, y, false) == '0') {
+                        labyrinth[x - 1][y] = 'P';
+                        x--;
+                    }
+                } else if (zaehlenVier(labyrinth, x, y, '0', false) == 0) { //TODO: DO DA PROGRAMMING
+                    if (zaehlenVier(labyrinth, x, y, '8', false) == 1) {
+                        labyrinth[x][y] = 'F';
+                        if (getNorden(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y - 1] = 'P';
+                            y--;
+                        } else if (getOsten(labyrinth, x, y, false) == '8') {
+                            labyrinth[x + 1][y] = 'P';
+                            x++;
+                        } else if (getSueden(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y + 1] = 'P';
+                            y++;
+                        } else if (getWesten(labyrinth, x, y, false) == '8') {
+                            labyrinth[x - 1][y] = 'P';
+                            x--;
+                        }
+                    } else if (zaehlenVier(labyrinth, x, y, '8', false) == 0) {
+                        labyrinth[x][y] = 'F';
+                        if (getNorden(labyrinth, x, y, false) == 'V') {
+                            labyrinth[x][y - 1] = 'P';
+                            y--;
+                        } else if (getOsten(labyrinth, x, y, false) == '<') {
+                            labyrinth[x + 1][y] = 'P';
+                            x++;
+                        } else if (getSueden(labyrinth, x, y, false) == '^') {
+                            labyrinth[x][y + 1] = 'P';
+                            y++;
+                        } else if (getWesten(labyrinth, x, y, false) == '>') {
+                            labyrinth[x - 1][y] = 'P';
+                            x--;
+                        }
+                    } else {
+                        if (getNorden(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y] = '^';
+                            labyrinth[x][y - 1] = 'P';
+                            y--;
+                        } else if (getOsten(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y] = '>';
+                            labyrinth[x + 1][y] = 'P';
+                            x++;
+                        } else if (getSueden(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y] = 'V';
+                            labyrinth[x][y + 1] = 'P';
+                            y++;
+                        } else if (getWesten(labyrinth, x, y, false) == '8') {
+                            labyrinth[x][y] = '<';
+                            labyrinth[x - 1][y] = 'P';
+                            x--;
+                        }
+                    }
+                } else {
+                    if (getNorden(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y] = '^';
+                        labyrinth[x][y - 1] = 'P';
+                        y--;
+                    } else if (getOsten(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y] = '>';
+                        labyrinth[x + 1][y] = 'P';
+                        x++;
+                    } else if (getSueden(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y] = 'V';
+                        labyrinth[x][y + 1] = 'P';
+                        y++;
+                    } else if (getWesten(labyrinth, x, y, false) == '0') {
+                        labyrinth[x][y] = '<';
+                        labyrinth[x - 1][y] = 'P';
+                        x--;
+                    }
                 }
-            } else if (zaehlenVier(labyrinth, x, y, '0', false) == 0) { //TODO: DO DA PROGRAMMING
-
-            } else {
-
+                sv.step(labyrinth);
+                n++;
+                if (zaehlenVier(labyrinth, x, y, '7', false) > 0) {
+                    win = true;
+                } else if (n > 900) {
+                    break;
+                }
             }
         }
+        sv.start();
     }
 
     public static boolean istMoeglich(char[][] labyrinth) {
@@ -73,7 +154,6 @@ public class Labyrinth {
                         if (labyrinth[i][j] == '9' && getSueden(labyrinth, i, j, false) == '0') {
                             labyrinthB[i][j + 1] = '9';
                         }
-                        //System.out.println((getOsten(labyrinth, i, j, false) == '0') + ", " + i + ", " + j);
                         if (labyrinth[i][j] == '9' && getOsten(labyrinth, i, j, false) == '0') {
                             labyrinthB[i + 1][j] = '9';
                         }
@@ -103,7 +183,7 @@ public class Labyrinth {
     }
 
     public static void main(String[] args) {
-        char[][] labyrinth = leseLabyrinth(4);
-        System.out.println(istMoeglich(labyrinth));
+        char[][] labyrinth = leseLabyrinth(5);
+        labyrinthSimulation(labyrinth);
     }
 }
