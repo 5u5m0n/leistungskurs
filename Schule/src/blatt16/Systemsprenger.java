@@ -16,13 +16,9 @@ public class Systemsprenger {
                 charr[1] = 'P';
                 charr[2] = 'R';
                 charr[3] = '_';
-                int z = 46;
                 for (int j = 4; j < charr.length; j++) {
-                    while (z == 46) {
-                        z = zufallGanz(32, 127);
-                    }
+                    int z = zufallGanz(65, 90);
                     charr[j] = (char) z;
-                    z = 46;
                 }
                 String s = new String(charr);
                 File file = new File("/home/simon/IdeaProjects/leistungskurs/Schule/sprengtest/" + s + ".txt");
@@ -30,9 +26,7 @@ public class Systemsprenger {
                 System.out.println(file.canWrite());
                 char[] charrs = new char[1024];
                 for (int j = 0; j < charrs.length; j++) {
-                    while (z == 46) {
-                        z = zufallGanz(32, 127);
-                    }
+                    int z = zufallGanz(32, 127);
                     charrs[j] = (char) z;
                     z = 46;
                 }
@@ -40,7 +34,6 @@ public class Systemsprenger {
                 fw.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("FUCK");
             }
         }
     }
@@ -61,6 +54,6 @@ public class Systemsprenger {
     }
 
     public static void main(String[] args) {
-        reinigen();
+        sprengen(10);
     }
 }
