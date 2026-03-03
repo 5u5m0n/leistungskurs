@@ -37,4 +37,8 @@ public class TuermeVonHanoi {
         a = new String(arrA);
         b = new String(arrB);
     }
+
+    public static void platziereTurm() {
+
+    }
 }
