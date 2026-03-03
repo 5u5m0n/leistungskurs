@@ -6,39 +6,24 @@ public class TuermeVonHanoi {
     static String stabC;
 
     public static void initStaebe(int n) {
-        char[] arr = new char[n];
-        char[] arr2 = new char[n];
-        for (int i = n - 1; i > -1; i--) {
-            arr[i] = Integer.toString(i).charAt(0);
-            arr2[i] = ' ';
+        for (int i = 1; i <= n; i++) {
+            stabA = i+stabA;
         }
-        stabA = new String(arr);
-        stabB = new String(arr2);
-        stabC = new String(arr2);
+        stabB = "";
+        stabC = "";
     }
+
+
 
     public static void platziereScheibe(String a, String b) {
-        char c = ' ';
-        char[] arrA = a.toCharArray();
-        char[] arrB = b.toCharArray();
-        for (int i = a.length() - 1; i > -1; i++) {
-            if (a.charAt(i) != ' ') {
-                c = a.charAt(i);
-                arrA[i] = ' ';
-                break;
-            }
-        }
-        for (int i = b.length() - 2; i > -1; i--) {
-            if (b.charAt(i) != ' ') {
-                arrB[i] = c;
-                break;
-            }
-        }
-        a = new String(arrA);
-        b = new String(arrB);
+
     }
 
-    public static void platziereTurm() {
+    public static void platziereTurm(int n) {
+        if (n % 2 == 0) {
 
+        } else {
+
+        }
     }
 }
