@@ -24,16 +24,22 @@ public class TuermeVonHanoi {
         String s = null;
         switch(n) {
             case 1:
-                s = stabA.substring(stabA.length()-1);
-                stabA = stabA.substring(0, stabA.length()-1);
+                if (!stabA.isEmpty()) {
+                    s = stabA.substring(stabA.length()-1);
+                    stabA = stabA.substring(0, stabA.length()-1);
+                }
                 break;
             case 2:
-                s = stabB.substring(stabB.length()-1);
-                stabB = stabB.substring(0, stabB.length()-1);
+                if (!stabB.isEmpty()) {
+                    s = stabB.substring(stabB.length()-1);
+                    stabB = stabB.substring(0, stabB.length()-1);
+                }
                 break;
             case 3:
-                s = stabC.substring(stabC.length()-1);
-                stabC = stabC.substring(0, stabC.length()-1);
+                if (!stabC.isEmpty()) {
+                    s = stabC.substring(stabC.length()-1);
+                    stabC = stabC.substring(0, stabC.length()-1);
+                }
                 break;
         }
         return s;
@@ -42,7 +48,7 @@ public class TuermeVonHanoi {
     public static void addScheibe(int n, String s) {
         switch(n) {
             case 1:
-                stabA = stabA + s;
+                    stabA = stabA + s;
                 break;
             case 2:
                 stabB = stabB + s;
@@ -84,20 +90,19 @@ public class TuermeVonHanoi {
     public static boolean platziereTurm(int n, int von, int zu) {
         if (n < 1) {
             return true;
-        } else if (n % 2 == 0) {
-            platziereScheibe(von, findeReststab(von, zu));
-            platziereTurm(n - 1, von, zu);
         } else {
+            int rest = findeReststab(von, zu);
+            platziereTurm(n-1, von, rest);
             platziereScheibe(von, zu);
-            platziereTurm(n - 1, findeReststab(von, zu), zu);
+            platziereTurm(n-1, rest, zu);
         }
         return false;
     }
 
     public static void main(String[] args) {
-        initStaebe(3);
+        initStaebe(8);
         printStaebe();
-        platziereTurm(3, 1, 3);
+        platziereTurm(8, 1, 3);
 
     }
 }
