@@ -5,7 +5,7 @@ import static blatt13.Zufall.zufall;
 public class Kaffeemaschine {
 
     //Bohnenbehaelter Groesse = 350g
-    int bohnen; //in g
+    double bohnen; //in g
 
     //Wasserbehaeleter Groesse = 800ml
     int wasser; // in ml
@@ -15,9 +15,9 @@ public class Kaffeemaschine {
 
     //Kaffeesatzbehaelter : max 600g; nach jeder nutzung += Masse verwendeten Kaffees
     //                         V-> Kein Kaffee kann mehr gezogen werden
-    int kaffeesatz; //in g
+    double kaffeesatz; //in g
 
-    public void bohnenAuffuellen(int menge) {
+    public void bohnenAuffuellen(double menge) {
         if (this.bohnen + menge <= 350) {
             this.bohnen += menge;
             System.out.println("Bohnen: " + this.bohnen + " g");
@@ -87,9 +87,10 @@ public class Kaffeemaschine {
             if (fehler) {
                 System.out.println("Fehler! Eingaben überprüfen!");
             } else {
-                bohnen -= 0.5 * intensitaet;
+                bohnen -= 0.5 * intensitaet * ((double) menge / 10);
                 dreck += 1;
-                kaffeesatz += menge;
+                kaffeesatz += ((double) menge / 10) * 0.5 * intensitaet;
+                wasser -= menge;
                 System.out.println(menge + "ml Kaffee mit einer Intensitaet von " + intensitaet + " erfolgreich gezogen.");
             }
         }
