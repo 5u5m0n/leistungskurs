@@ -7,6 +7,12 @@ public class Ofen {
     int beheizungsmodusIndex = 0;
     int temparatur;
 
+    public Ofen() {
+        this.beheizungsmodus = "Aus";
+        this.beheizungsmodusIndex = 0;
+        this.temparatur = 0;
+    }
+
     void temparaturEinstellen(int temparatur) {
         if (temparatur > 250) {
             temparatur = 250;
@@ -14,6 +20,7 @@ public class Ofen {
             temparatur = 0;
         }
         this.temparatur = temparatur;
+        System.out.println("Temparatur: " + temparatur);
     }
 
     void beheizungsmodusErhoehen() {
@@ -23,6 +30,7 @@ public class Ofen {
             this.beheizungsmodusIndex = 0;
         }
         this.beheizungsmodus = BEHEIZUNGSMODI[this.beheizungsmodusIndex];
+        System.out.println("Beheizungsmodus: " + this.beheizungsmodus);
     }
 
     void beheizungsmodusReduzieren() {
@@ -32,5 +40,6 @@ public class Ofen {
             this.beheizungsmodusIndex = BEHEIZUNGSMODI.length - 1;
         }
         this.beheizungsmodus = BEHEIZUNGSMODI[this.beheizungsmodusIndex];
+        System.out.println("Beheizungsmodus: " + this.beheizungsmodus);
     }
 }
