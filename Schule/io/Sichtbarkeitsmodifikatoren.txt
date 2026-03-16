@@ -1,0 +1,5 @@
+                       | public       | protected                              | private               | kein Modifikator |
+                       |--------------|----------------------------------------|-----------------------|------------------|
+Sichtbarkeit           | öffentlich   | eingeschränkt                          | privat                | Paketintern      |
+                       |--------------|----------------------------------------|-----------------------|------------------|
+Zugriff möglich für... | alle Klassen | Klasse im selben Package; Unterklassen | Innerhalb eig. Klasse | Im Package       |
