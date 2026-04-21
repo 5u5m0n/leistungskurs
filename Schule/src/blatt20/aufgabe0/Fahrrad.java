@@ -1,5 +1,8 @@
 package blatt20.aufgabe0;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Fahrrad {
 
     String      marke;
@@ -38,4 +41,13 @@ public class Fahrrad {
                this.gaengeVorneAnzahl + " Gaenge vorne, " +
                this.reifendurchmesser + " Reifendurchmesser.");
    }
+
+    @Override
+    public boolean equals(Object o) {
+       if (this == o) return true;
+       if (o == null || getClass() != o.getClass()) return false;
+       Fahrrad fahrrad = (Fahrrad) o;
+       return reflektorAnPedalen == fahrrad.reflektorAnPedalen && katzenaugen == fahrrad.katzenaugen && ruecklicht == fahrrad.ruecklicht && frontlicht == fahrrad.frontlicht && reifendurchmesser == fahrrad.reifendurchmesser && zulassung == fahrrad.zulassung && gaengeVorneAnzahl == fahrrad.gaengeVorneAnzahl && gaengeHintenAnzahl == fahrrad.gaengeHintenAnzahl && Objects.equals(marke, fahrrad.marke) && Objects.deepEquals(farben, fahrrad.farben) && Objects.equals(typ, fahrrad.typ);
+    }
+
 }

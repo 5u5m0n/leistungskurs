@@ -35,24 +35,31 @@ public class Benutzerkonto {
     public void setPasswort(String altesPasswort, String neuesPasswort) {
         if (this.passwort.equals(altesPasswort) && this.angemeldet) {
             this.passwort = neuesPasswort;
+            System.out.println("Neues Passwort gesetzt.");
         }
     }
 
-    public void guthabenHinzufuegen(double menge) {
-        boolean gueltig = true;
-        if (gueltig && this.angemeldet) {
+    public void guthabenHinzufuegen(double menge, String gutscheincode) {
+        if (this.angemeldet && !gutscheincode.isEmpty()) {
             this.gutscheinguthaben += menge;
+            System.out.println("Neuses Guthaben: " + this.gutscheinguthaben);
+        } else {
+            System.out.println("Fehler");
         }
     }
 
     public void anmelden(String passwort) {
-        if (passwort.equals(this.passwort) && this.angemeldet) {
+        if (passwort.equals(this.passwort)) {
             this.angemeldet = true;
+            System.out.println("Angemeldet!");
+        } else {
+            System.out.println("Fehler");
         }
     }
 
     public void abmelden() {
         this.angemeldet = false;
+        System.out.println("Abgemeldet!");
     }
 
 

@@ -75,4 +75,6 @@ public class Auto {
         this.tank -= km * geschwindigkeit;
     }
 
+
+
 }
