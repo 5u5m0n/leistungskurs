@@ -49,8 +49,17 @@ public class Farmer {
         return this.giesskanne.istAusgeruestet();
     }
 
+    public void schlafen() {
+        this.energie = 50;
+    }
+
+    public void energieVerbrauchen() {
+        this.energie = Math.min(0, this.energie - 1);
+    }
+
     public void giesskanneAusruesten() {
         this.giesskanne.setAusgeruestet(true);
+        this.axtAblegen();
     }
 
     public void giesskanneAblegen() {
@@ -59,6 +68,7 @@ public class Farmer {
 
     public void axtAusruesten() {
         this.axt.setAusgeruestet(true);
+        this.giesskanneAblegen();
     }
 
     public void axtAblegen() {

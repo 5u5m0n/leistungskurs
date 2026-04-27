@@ -27,5 +27,15 @@ public class Axt {
         }
     }
 
+    public int getSchaden() {
+        return switch (this.stufe) {
+            case 1 -> 1;
+            case 2 -> 2;
+            case 3 -> 4;
+            case 4 -> 6;
+            default -> -1;
+        };
+    }
+
 
 }

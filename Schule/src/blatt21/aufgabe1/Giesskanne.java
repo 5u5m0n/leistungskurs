@@ -16,12 +16,12 @@ public class Giesskanne {
     }
 
     public int getVerbrauch() {
-        return switch (this.wasserstand) {
+        return switch (this.stufe) {
             case 1 -> 1;
             case 2 -> 3;
             case 3 -> 9;
             case 4 -> 24;
-            default -> 0;
+            default -> -1;
         };
     }
 
