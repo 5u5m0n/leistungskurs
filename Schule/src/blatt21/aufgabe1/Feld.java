@@ -31,6 +31,10 @@ public class Feld {
         return bewaessert;
     }
 
+    public boolean fertigGewachsen() {
+        return aktuelleWachszeit >= maximaleWachszeit;
+    }
+
     public void bewaessern() {
         if (!this.bewaessert) {
             this.bewaessert = true;

@@ -1,22 +1,20 @@
 package blatt21.aufgabe1;
 
-public class Giesskanne {
-    private int stufe;
-    private boolean ausgeruestet;
+public class Giesskanne extends Item {
     private int wasserstand;
 
     public Giesskanne() {
-        this.stufe = 1;
-        this.ausgeruestet = false;
+        this.initStufe();
+        this.setAusgeruestet(false);
         this.wasserstand = 0;
     }
 
     public int getMaxWasserstand() {
-        return 30 + (15 * (this.stufe - 1));
+        return 30 + (15 * (this.getStufe() - 1));
     }
 
     public int getVerbrauch() {
-        return switch (this.stufe) {
+        return switch (this.getStufe()) {
             case 1 -> 1;
             case 2 -> 3;
             case 3 -> 9;
@@ -25,24 +23,8 @@ public class Giesskanne {
         };
     }
 
-    public int getStufe() {
-        return stufe;
-    }
-
-    public boolean istAusgeruestet() {
-        return ausgeruestet;
-    }
-
-    public void setAusgeruestet(boolean ausgeruestet) {
-        this.ausgeruestet = ausgeruestet;
-    }
-
     public int getWasserstand() {
         return wasserstand;
-    }
-
-    public void upgrade() {
-        this.stufe = Math.min(this.stufe, 4);
     }
 
     public void giessen() {

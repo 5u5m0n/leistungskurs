@@ -17,6 +17,15 @@ public class Farmer {
         this.giesskanne = new Giesskanne();
     }
 
+    public Farmer(Farmer farmer) {
+        this.vorname = farmer.vorname;
+        this.farmname = farmer.farmname;
+        this.vermoegen = farmer.vermoegen;
+        this.energie = farmer.energie;
+        this.axt = farmer.axt;
+        this.giesskanne = farmer.giesskanne;
+    }
+
     public String getVorname() {
         return vorname;
     }
@@ -39,6 +48,10 @@ public class Farmer {
 
     public int getEnergie() {
         return energie;
+    }
+
+    public void addVermoegen(double vermoegen) {
+        this.vermoegen += vermoegen;
     }
 
     public boolean istAxtAusgeruestet() {

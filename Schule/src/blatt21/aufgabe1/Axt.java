@@ -1,39 +1,37 @@
 package blatt21.aufgabe1;
 
-public class Axt {
-    private int stufe;
-    private boolean ausgeruestet;
+import static blatt13.Zufall.zufall;
+
+public class Axt extends Item {
 
     public Axt() {
-        this.stufe = 1;
-        this.ausgeruestet = false;
-    }
-
-    public boolean istAusgeruestet() {
-        return ausgeruestet;
-    }
-
-    public void setAusgeruestet(boolean ausgeruestet) {
-        this.ausgeruestet = ausgeruestet;
-    }
-
-    public int getStufe() {
-        return stufe;
-    }
-
-    public void upgrade() {
-        if (this.stufe < 4) {
-            this.stufe++;
-        }
+        this.initStufe();
+        this.setAusgeruestet(false);
     }
 
     public int getSchaden() {
-        return switch (this.stufe) {
-            case 1 -> 1;
-            case 2 -> 2;
-            case 3 -> 4;
-            case 4 -> 6;
-            default -> -1;
+        int schaden;
+        switch (this.getStufe()) {
+            case 1 -> schaden = 1;
+            case 2 -> schaden = 2;
+            case 3 -> schaden = 4;
+            case 4 -> schaden = 6;
+            default -> schaden = 0;
+        };
+        double zufall = zufall(1);
+        if (zufall <= this.getCritChance()) {
+            schaden *= 2;
+        }
+        return schaden;
+    }
+
+    public double getCritChance() {
+        return switch (this.getStufe()) {
+            case 1 -> 0.04;
+            case 2 -> 0.08;
+            case 3 -> 0.12;
+            case 4 -> 0.16;
+            default -> 0;
         };
     }
 
