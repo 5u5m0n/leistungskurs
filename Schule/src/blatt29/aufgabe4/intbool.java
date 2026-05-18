@@ -45,7 +45,7 @@ public class intbool {
         }
     }
 
-    public int getInt() {
+    public int get() {
         return this.integer;
     }
 }
