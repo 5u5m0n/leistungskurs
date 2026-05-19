@@ -2,21 +2,26 @@ package blatt29.aufgabe4;
 
 public abstract class Wesen {
     private int level;
-    private int staerke;
+
+    private Attributswert staerke;
+    private Attributswert mStaerke;
     private int konstitution;
-    private int mStaerke;
-    private int mVerteidigung;
+
     private int maxHP;
     private int maxSP;
     private int currentHP;
     private int currentSP;
+
     private int geschwindigkeit;
     private double glueck;
+
+    private Waffe waffe;
 
     public double getGlueck() {
         return this.glueck;
     }
 
+    //Setter && Getter
     protected void setGlueck(double glueck) {
         this.glueck = glueck;
     }
@@ -61,21 +66,15 @@ public abstract class Wesen {
         this.maxHP = maxHP;
     }
 
-    public int getMVerteidigung() {
-        return this.mVerteidigung;
-    }
-
-    protected void setMVerteidigung(int mVerteidigung) {
-        this.mVerteidigung = mVerteidigung;
-    }
-
-    public int getMStaerke() {
+    public Attributswert getMStaerke() {
         return this.mStaerke;
     }
 
     protected void setMStaerke(int mStaerke) {
-        this.mStaerke = mStaerke;
+        this.mStaerke.setWert(mStaerke);
     }
+
+    protected void setMStaerke(Attributswert mStaerke) { this.mStaerke = mStaerke; }
 
     public int getKonstitution() {
         return this.konstitution;
@@ -85,13 +84,15 @@ public abstract class Wesen {
         this.konstitution = konstitution;
     }
 
-    public int getStaerke() {
+    public Attributswert getStaerke() {
         return this.staerke;
     }
 
     protected void setStaerke(int staerke) {
-        this.staerke = staerke;
+        this.staerke.setWert(staerke);
     }
+
+    protected void setStaerke(Attributswert staerke) { this.staerke = staerke; }
 
     public int getLevel() {
         return this.level;
@@ -101,6 +102,7 @@ public abstract class Wesen {
         this.level = level;
     }
 
+    //Prozeduren
     public void death() {
         System.out.println("IUSDKHGFIUGHPIAUFZH");
     }
