@@ -16,7 +16,7 @@ public class Angriff extends AktiveFaehigkeit {
     }
 
     public int getSchaden() {
-
+        return -1;
     }
 
 
