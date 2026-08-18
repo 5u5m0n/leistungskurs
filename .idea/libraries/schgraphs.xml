@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="schgraphs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Schule/schgraphs.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

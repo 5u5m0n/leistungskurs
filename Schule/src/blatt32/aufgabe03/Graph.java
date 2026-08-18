@@ -1,7 +1,6 @@
 package blatt32.aufgabe03;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import static blatt11.BubbleSort.bubbleSort;
 
