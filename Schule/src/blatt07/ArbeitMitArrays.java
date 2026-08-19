@@ -2,7 +2,7 @@ package blatt07;
 
 
 
-public class ArbeitMitArrays {
+public class ArbeitMitArrays<T> {
 
     /**
      * Druckt einen Array aus.

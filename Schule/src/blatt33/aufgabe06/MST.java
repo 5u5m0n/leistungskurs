@@ -1,8 +1,13 @@
 package blatt33.aufgabe06;
 
 import blatt32.aufgabe03.Graph;
+import blatt33.aufgabe01.Queue;
+import schgraphs.SchGraphs;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import static blatt33.aufgabe05.GraphSuche.erreichbarkeit;
 
 public class MST {
 
@@ -53,28 +58,34 @@ public class MST {
         return primMst;
     }
 
+    public static Graph kruskalMst(Graph g) {
+        Graph kruskalMst = new Graph(g.size());
+        boolean directed = g.isDirected();
+        int[][] adjmat = g.getAdjazenzmatrix();
+        ArrayList<EdgeVector> edges = new ArrayList<>();
+        for (int i = 0; i < g.size(); i++) {
+            for (int j = 0; j < adjmat[i].length; j++) {
+                if (adjmat[i][j] != 0) edges.add(new EdgeVector(i, j, adjmat[i][j]));
+            }
+        }
+        edges.sort((e1, e2) -> e1.weight - e2.weight);
+
+        for (int k = 0; k < edges.size(); k++) {
+            if (!erreichbarkeit(kruskalMst, edges.get(k).from, edges.get(k).to)) {
+                kruskalMst.addEdge(edges.get(k).from, edges.get(k).to, edges.get(k).weight, directed);
+                System.out.println("a");
+            } else System.out.println("b");
+        }
+        return kruskalMst;
+    }
+
     public static void main(String[] args) {
+        SchGraphs sg = new SchGraphs();
         Graph g = new Graph();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addVertex();
-        g.addEdge(0, 8, 5, false);
-        g.addEdge(0, 7, 2, false);
-        g.addEdge(1, 10, 4, false);
-        g.addEdge(1, 3, 2, false);
-        g.addEdge(2, 5, 2, false);
-        g.addEdge(2, 9, 1, false);
-        g.addEdge(3, 11, 1, false);
-        g.addEdge(4, 8, 2, false);
-        g.exportGraph("Graph4");
+        File file = new File("/home/simon/IdeaProjects/leistungskurs/Schule/export/graph04.txt");
+        g.importGraph(file);
+        sg.step(g.getAdjazenzmatrix());
+        sg.step(kruskalMst(g).getAdjazenzmatrix());
+        sg.start();
     }
 }
